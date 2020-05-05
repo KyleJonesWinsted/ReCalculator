@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		DAD823DF246218E9003F5C97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD823DE246218E9003F5C97 /* Assets.xcassets */; };
 		DAD823E2246218E9003F5C97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD823E1246218E9003F5C97 /* Preview Assets.xcassets */; };
 		DAD823E5246218E9003F5C97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD823E3246218E9003F5C97 /* LaunchScreen.storyboard */; };
+		DAD823EE24621A39003F5C97 /* MathParser in Frameworks */ = {isa = PBXBuildFile; productRef = DAD823ED24621A39003F5C97 /* MathParser */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD823EE24621A39003F5C97 /* MathParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +96,9 @@
 			dependencies = (
 			);
 			name = ReCalculator;
+			packageProductDependencies = (
+				DAD823ED24621A39003F5C97 /* MathParser */,
+			);
 			productName = ReCalculator;
 			productReference = DAD823D2246218E7003F5C97 /* ReCalculator.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +127,9 @@
 				Base,
 			);
 			mainGroup = DAD823C9246218E7003F5C97;
+			packageReferences = (
+				DAD823EC24621A39003F5C97 /* XCRemoteSwiftPackageReference "DDMathParser" */,
+			);
 			productRefGroup = DAD823D3246218E7003F5C97 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -346,6 +354,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DAD823EC24621A39003F5C97 /* XCRemoteSwiftPackageReference "DDMathParser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davedelong/DDMathParser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DAD823ED24621A39003F5C97 /* MathParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DAD823EC24621A39003F5C97 /* XCRemoteSwiftPackageReference "DDMathParser" */;
+			productName = MathParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DAD823D9246218E7003F5C97 /* ReCalculator.xcdatamodeld */ = {
