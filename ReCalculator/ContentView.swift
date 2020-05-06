@@ -83,11 +83,11 @@ class MathEntryInputAccessory: UIView {
     }
     
     @objc func testSelector() {
-        guard let textField = self.textField else { return }
-        textField.text?.append("√()")
-        if let selectedRange = textField.selectedTextRange,
-            let newPosition = textField.position(from: selectedRange.start, offset: -1) {
-                    textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
+        guard let textField = self.textField,
+            let selectedRange = textField.selectedTextRange else { return }
+        textField.replace(selectedRange, withText: "√()")
+        if let newPosition = textField.position(from: selectedRange.start, offset: 2) {
+            textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
         }
     }
 }
