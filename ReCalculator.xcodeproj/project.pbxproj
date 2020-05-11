@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA9713CC24686D2C0018C022 /* CreateEditFormulaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */; };
 		DAD823D6246218E7003F5C97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD823D5246218E7003F5C97 /* AppDelegate.swift */; };
 		DAD823D8246218E7003F5C97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD823D7246218E7003F5C97 /* SceneDelegate.swift */; };
 		DAD823DB246218E7003F5C97 /* ReCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAD823D9246218E7003F5C97 /* ReCalculator.xcdatamodeld */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditFormulaViewController.swift; sourceTree = "<group>"; };
 		DAD823D2246218E7003F5C97 /* ReCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD823D5246218E7003F5C97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAD823D7246218E7003F5C97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				DAD823D5246218E7003F5C97 /* AppDelegate.swift */,
 				DAD823D7246218E7003F5C97 /* SceneDelegate.swift */,
 				DAD823DC246218E7003F5C97 /* ContentView.swift */,
+				DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */,
 				DAD823DE246218E9003F5C97 /* Assets.xcassets */,
 				DAD823E3246218E9003F5C97 /* LaunchScreen.storyboard */,
 				DAD823E6246218E9003F5C97 /* Info.plist */,
@@ -158,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAD823D6246218E7003F5C97 /* AppDelegate.swift in Sources */,
+				DA9713CC24686D2C0018C022 /* CreateEditFormulaViewController.swift in Sources */,
 				DAD823DB246218E7003F5C97 /* ReCalculator.xcdatamodeld in Sources */,
 				DAD823DD246218E7003F5C97 /* ContentView.swift in Sources */,
 				DAD823D8246218E7003F5C97 /* SceneDelegate.swift in Sources */,
@@ -301,6 +305,7 @@
 				DEVELOPMENT_TEAM = 25DUYVKN98;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ReCalculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -321,6 +326,7 @@
 				DEVELOPMENT_TEAM = 25DUYVKN98;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ReCalculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
