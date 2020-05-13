@@ -16,6 +16,7 @@
 		DAD823E2246218E9003F5C97 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD823E1246218E9003F5C97 /* Preview Assets.xcassets */; };
 		DAD823E5246218E9003F5C97 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD823E3246218E9003F5C97 /* LaunchScreen.storyboard */; };
 		DAD823EE24621A39003F5C97 /* MathParser in Frameworks */ = {isa = PBXBuildFile; productRef = DAD823ED24621A39003F5C97 /* MathParser */; };
+		DAD823F4246B8231003F5C97 /* CreateEditFormulaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD823F3246B8231003F5C97 /* CreateEditFormulaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		DAD823E1246218E9003F5C97 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DAD823E4246218E9003F5C97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAD823E6246218E9003F5C97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD823F3246B8231003F5C97 /* CreateEditFormulaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditFormulaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				DAD823D7246218E7003F5C97 /* SceneDelegate.swift */,
 				DAD823DC246218E7003F5C97 /* ContentView.swift */,
 				DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */,
+				DAD823F3246B8231003F5C97 /* CreateEditFormulaView.swift */,
 				DAD823DE246218E9003F5C97 /* Assets.xcassets */,
 				DAD823E3246218E9003F5C97 /* LaunchScreen.storyboard */,
 				DAD823E6246218E9003F5C97 /* Info.plist */,
@@ -165,6 +168,7 @@
 				DAD823DB246218E7003F5C97 /* ReCalculator.xcdatamodeld in Sources */,
 				DAD823DD246218E7003F5C97 /* ContentView.swift in Sources */,
 				DAD823D8246218E7003F5C97 /* SceneDelegate.swift in Sources */,
+				DAD823F4246B8231003F5C97 /* CreateEditFormulaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
