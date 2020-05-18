@@ -8,16 +8,6 @@
 
 import UIKit
 
-enum InputAccessoryButtonLabels: String, CaseIterable {
-    case sqrt = "√"
-    case add = "+"
-    case subtract = "-"
-    case multiply = "*"
-    case divide = "/"
-    case openParan = "("
-    case closeParan = ")"
-}
-
 class CreateEditFormulaView: UIView {
     
     let textField: UITextField = {
@@ -26,29 +16,8 @@ class CreateEditFormulaView: UIView {
         textField.keyboardType = .decimalPad
         textField.font = .boldSystemFont(ofSize: 20.0)
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.textAlignment = .center
         return textField
-    }()
-    
-    let accessory: UIView = {
-        let accessory = UIView()
-        accessory.backgroundColor = .systemGray5
-        accessory.frame = CGRect(x: 0, y: 0, width: 0, height: 40.0)
-        accessory.translatesAutoresizingMaskIntoConstraints = false
-        return accessory
-    }()
-    
-    let accessoryButtons: [UIButton] = {
-        var buttons = [UIButton]()
-        for label in InputAccessoryButtonLabels.allCases {
-            let button = UIButton()
-            button.setTitle(label.rawValue, for: .normal)
-            button.setTitleColor(.black, for: .normal)
-            button.setTitleColor(.white, for: .highlighted)
-            button.addTarget(self, action: #selector(insertFromAccessory), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            buttons.append(button)
-        }
-        return buttons
     }()
     
     let variableButtons: [UIButton] = {
@@ -74,33 +43,16 @@ class CreateEditFormulaView: UIView {
         return stack
     }()
     
-    let accessoryStackView: UIStackView = {
-        var stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .fill
-        stack.distribution = .fillEqually
-        stack.spacing = 8.0
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-    
     init() {
         super.init(frame: .zero)
         
         backgroundColor = .white
         
-        textField.inputAccessoryView = accessory
-            
         //Set child views
         addSubview(textField)
         addSubview(variableStack)
         variableButtons.forEach { (button) in
             variableStack.addArrangedSubview(button)
-        }
-        
-        accessory.addSubview(accessoryStackView)
-        accessoryButtons.forEach { (button) in
-            accessoryStackView.addArrangedSubview(button)
         }
         
     }
@@ -127,42 +79,12 @@ class CreateEditFormulaView: UIView {
         variableStack.trailingAnchor.constraint(
             equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
-        accessoryStackView.leadingAnchor.constraint(equalTo: accessory.leadingAnchor).isActive = true
-        accessoryStackView.trailingAnchor.constraint(equalTo: accessory.trailingAnchor).isActive = true
-        
         super.updateConstraints()
     }
     
-    @objc func insertFromAccessory(sender: UIButton) {
-        guard let title = sender.title(for: .normal),
-            let inputLabel = InputAccessoryButtonLabels(rawValue: title),
-            let selectedRange = textField.selectedTextRange else { return }
-        var stringToEnter: String
-        var cursorOffset: Int
-        switch inputLabel {
-            case .sqrt:
-                stringToEnter = "√()"
-                cursorOffset = 2
-            case .openParan:
-                stringToEnter = "()"
-                cursorOffset = 1
-            case .add, .subtract, .multiply, .divide, .closeParan:
-                stringToEnter = title
-                cursorOffset = 1
-        }
-        textField.replace(selectedRange, withText: stringToEnter)
-        if let newPosition = textField.position(from: selectedRange.start, offset: cursorOffset) {
-            textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
-        }
-    }
-    
     @objc func insertVariable(sender: UIButton) {
-        guard let letter = sender.title(for: .normal),
-            let selectedRange = textField.selectedTextRange else { return }
-        textField.replace(selectedRange, withText: letter)
-        if let newPosition = textField.position(from: selectedRange.start, offset: 1) {
-            textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
-        }
+        guard let letter = sender.title(for: .normal) else { return }
+        textField.insert(text: letter)
     }
     
 }

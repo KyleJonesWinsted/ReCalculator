@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA89E763247203EB003DDC2E /* MathInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */; };
+		DA89E7652472081A003DDC2E /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA89E7642472081A003DDC2E /* UIKitExtensions.swift */; };
 		DA9713CC24686D2C0018C022 /* CreateEditFormulaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */; };
 		DAD823D6246218E7003F5C97 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD823D5246218E7003F5C97 /* AppDelegate.swift */; };
 		DAD823D8246218E7003F5C97 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD823D7246218E7003F5C97 /* SceneDelegate.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathInputAccessoryView.swift; sourceTree = "<group>"; };
+		DA89E7642472081A003DDC2E /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditFormulaViewController.swift; sourceTree = "<group>"; };
 		DAD823D2246218E7003F5C97 /* ReCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD823D5246218E7003F5C97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				DAD823DC246218E7003F5C97 /* ContentView.swift */,
 				DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */,
 				DAD823F3246B8231003F5C97 /* CreateEditFormulaView.swift */,
+				DA89E7642472081A003DDC2E /* UIKitExtensions.swift */,
+				DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */,
 				DAD823DE246218E9003F5C97 /* Assets.xcassets */,
 				DAD823E3246218E9003F5C97 /* LaunchScreen.storyboard */,
 				DAD823E6246218E9003F5C97 /* Info.plist */,
@@ -169,6 +175,8 @@
 				DAD823DD246218E7003F5C97 /* ContentView.swift in Sources */,
 				DAD823D8246218E7003F5C97 /* SceneDelegate.swift in Sources */,
 				DAD823F4246B8231003F5C97 /* CreateEditFormulaView.swift in Sources */,
+				DA89E7652472081A003DDC2E /* UIKitExtensions.swift in Sources */,
+				DA89E763247203EB003DDC2E /* MathInputAccessoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
