@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA65E1182475EF5B00947C83 /* FormulaVariableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA65E1172475EF5B00947C83 /* FormulaVariableView.swift */; };
 		DA89E763247203EB003DDC2E /* MathInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */; };
 		DA89E7652472081A003DDC2E /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA89E7642472081A003DDC2E /* UIKitExtensions.swift */; };
 		DA9713CC24686D2C0018C022 /* CreateEditFormulaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA65E1172475EF5B00947C83 /* FormulaVariableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaVariableView.swift; sourceTree = "<group>"; };
 		DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathInputAccessoryView.swift; sourceTree = "<group>"; };
 		DA89E7642472081A003DDC2E /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEditFormulaViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA89E76624720F73003DDC2E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DAD823F3246B8231003F5C97 /* CreateEditFormulaView.swift */,
+				DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */,
+				DA65E1172475EF5B00947C83 /* FormulaVariableView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DA89E76724720F7B003DDC2E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DA89E76824720F82003DDC2E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		DAD823C9246218E7003F5C97 = {
 			isa = PBXGroup;
 			children = (
@@ -71,10 +98,10 @@
 				DAD823D5246218E7003F5C97 /* AppDelegate.swift */,
 				DAD823D7246218E7003F5C97 /* SceneDelegate.swift */,
 				DAD823DC246218E7003F5C97 /* ContentView.swift */,
-				DA9713CB24686D2C0018C022 /* CreateEditFormulaViewController.swift */,
-				DAD823F3246B8231003F5C97 /* CreateEditFormulaView.swift */,
 				DA89E7642472081A003DDC2E /* UIKitExtensions.swift */,
-				DA89E762247203EB003DDC2E /* MathInputAccessoryView.swift */,
+				DA89E76624720F73003DDC2E /* Views */,
+				DA89E76724720F7B003DDC2E /* Controllers */,
+				DA89E76824720F82003DDC2E /* Model */,
 				DAD823DE246218E9003F5C97 /* Assets.xcassets */,
 				DAD823E3246218E9003F5C97 /* LaunchScreen.storyboard */,
 				DAD823E6246218E9003F5C97 /* Info.plist */,
@@ -177,6 +204,7 @@
 				DAD823F4246B8231003F5C97 /* CreateEditFormulaView.swift in Sources */,
 				DA89E7652472081A003DDC2E /* UIKitExtensions.swift in Sources */,
 				DA89E763247203EB003DDC2E /* MathInputAccessoryView.swift in Sources */,
+				DA65E1182475EF5B00947C83 /* FormulaVariableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

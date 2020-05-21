@@ -22,8 +22,9 @@ class CreateEditFormulaViewController: UIViewController, MathInputAccessoryViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createEditFormulaView.textField.inputAccessoryView = mathInputAccessory
         mathInputAccessory.delegate = self
+        createEditFormulaView.textField.inputAccessoryView = mathInputAccessory
+        createEditFormulaView.textField.becomeFirstResponder()
         
     }
     

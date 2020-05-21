@@ -8,30 +8,26 @@
 
 import UIKit
 
-class CreateEditFormulaView: UIView {
+class CreateEditFormulaView: UIView, FormulaVariableViewDelegate {
     
     let textField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter Formula"
         textField.keyboardType = .decimalPad
-        textField.font = .boldSystemFont(ofSize: 20.0)
+        textField.font = .boldSystemFont(ofSize: 30.0)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textAlignment = .center
         return textField
     }()
     
-    let variableButtons: [UIButton] = {
-        var buttons = [UIButton]()
-        for i in 1...3 {
-            let button = UIButton()
-            button.setTitle(i.description, for: .normal)
-            button.setTitleColor(.systemBlue, for: .normal)
-            button.setTitleColor(.gray, for: .highlighted)
-            button.addTarget(self, action: #selector(insertVariable), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            buttons.append(button)
+    let variables: [FormulaVariableView] = {
+        var variables = [FormulaVariableView]()
+        var tempLetters = "abcde"
+        for char in tempLetters {
+            let variable = FormulaVariableView(title: Character(char.description))
+            variables.append(variable)
         }
-        return buttons
+        return variables
     }()
     
     let variableStack: UIStackView = {
@@ -51,8 +47,9 @@ class CreateEditFormulaView: UIView {
         //Set child views
         addSubview(textField)
         addSubview(variableStack)
-        variableButtons.forEach { (button) in
-            variableStack.addArrangedSubview(button)
+        variables.forEach { (variable) in
+            variable.delegate = self
+            variableStack.addArrangedSubview(variable)
         }
         
     }
@@ -63,28 +60,34 @@ class CreateEditFormulaView: UIView {
     
     override func updateConstraints() {
         textField.leadingAnchor.constraint(
-            equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+            equalTo: safeAreaLayoutGuide.leadingAnchor,
             constant: 10.0).isActive = true
         textField.trailingAnchor.constraint(
-            equalTo: self.trailingAnchor).isActive = true
+            equalTo: safeAreaLayoutGuide.trailingAnchor,
+            constant: -10.0).isActive = true
         textField.topAnchor.constraint(
-            equalTo: self.safeAreaLayoutGuide.topAnchor,
+            equalTo: safeAreaLayoutGuide.topAnchor,
             constant: 10.0).isActive = true
         
         variableStack.topAnchor.constraint(
             equalTo: textField.bottomAnchor,
             constant: 20.0).isActive = true
         variableStack.leadingAnchor.constraint(
-            equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         variableStack.trailingAnchor.constraint(
-            equalTo: self.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        variables.forEach { (variable) in
+            variable.leadingAnchor.constraint(equalTo: variableStack.leadingAnchor).isActive = true
+            variable.trailingAnchor.constraint(equalTo: variableStack.trailingAnchor).isActive = true
+        }
         
         super.updateConstraints()
     }
     
-    @objc func insertVariable(sender: UIButton) {
+    func insertVariable(sender: UIButton) {
         guard let letter = sender.title(for: .normal) else { return }
-        textField.insert(text: letter)
+        textField.insert(character: Character(letter))
     }
-    
+        
 }
