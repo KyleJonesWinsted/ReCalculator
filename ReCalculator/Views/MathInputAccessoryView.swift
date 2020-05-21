@@ -34,7 +34,6 @@ class MathInputAccessoryView: UIView {
             button.setTitleColor(.black, for: .normal)
             button.setTitleColor(.white, for: .highlighted)
             button.addTarget(self, action: #selector(insertFromAccessory), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
             buttons.append(button)
         }
         return buttons
@@ -45,8 +44,6 @@ class MathInputAccessoryView: UIView {
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
-        stack.spacing = 8.0
-        stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
 
@@ -67,8 +64,7 @@ class MathInputAccessoryView: UIView {
     }
     
     override func updateConstraints() {
-        accessoryStackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        accessoryStackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        accessoryStackView.anchor(leading: leadingAnchor, trailing: trailingAnchor)
         
         super.updateConstraints()
     }

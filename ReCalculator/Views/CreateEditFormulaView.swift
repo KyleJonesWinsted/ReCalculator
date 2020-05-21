@@ -59,27 +59,17 @@ class CreateEditFormulaView: UIView, FormulaVariableViewDelegate {
     }
     
     override func updateConstraints() {
-        textField.leadingAnchor.constraint(
-            equalTo: safeAreaLayoutGuide.leadingAnchor,
-            constant: 10.0).isActive = true
-        textField.trailingAnchor.constraint(
-            equalTo: safeAreaLayoutGuide.trailingAnchor,
-            constant: -10.0).isActive = true
-        textField.topAnchor.constraint(
-            equalTo: safeAreaLayoutGuide.topAnchor,
-            constant: 10.0).isActive = true
+        textField.anchor(top: safeAreaLayoutGuide.topAnchor, topConstant: 10.0,
+                         leading: safeAreaLayoutGuide.leadingAnchor, leadingConstant: 10.0,
+                         trailing: safeAreaLayoutGuide.trailingAnchor, trailingConstant: -10.0)
         
-        variableStack.topAnchor.constraint(
-            equalTo: textField.bottomAnchor,
-            constant: 20.0).isActive = true
-        variableStack.leadingAnchor.constraint(
-            equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        variableStack.trailingAnchor.constraint(
-            equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+        variableStack.anchor(top: textField.bottomAnchor, topConstant: 20.0,
+                             leading: safeAreaLayoutGuide.leadingAnchor,
+                             trailing: safeAreaLayoutGuide.trailingAnchor)
         
         variables.forEach { (variable) in
-            variable.leadingAnchor.constraint(equalTo: variableStack.leadingAnchor).isActive = true
-            variable.trailingAnchor.constraint(equalTo: variableStack.trailingAnchor).isActive = true
+            variable.anchor(leading: variableStack.leadingAnchor,
+                            trailing: variableStack.trailingAnchor)
         }
         
         super.updateConstraints()
