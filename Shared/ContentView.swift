@@ -27,6 +27,7 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: deleteItems)
+                .onMove(perform: moveItems)
             }
             .toolbar {
 #if os(iOS)
@@ -74,6 +75,10 @@ struct ContentView: View {
             }
         }
     }
+    
+    private func moveItems(from source: IndexSet, to destination: Int) {
+        
+    }
 }
 
 private let itemFormatter: DateFormatter = {
@@ -85,6 +90,8 @@ private let itemFormatter: DateFormatter = {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        Group {
+            ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        }
     }
 }

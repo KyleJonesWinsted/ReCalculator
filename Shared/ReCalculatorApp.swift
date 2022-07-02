@@ -13,8 +13,9 @@ struct ReCalculatorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            FormulaCreationView()
+//            ContentView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
