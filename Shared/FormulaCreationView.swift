@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import MathParser
 
 struct Variable: Identifiable {
     var id = UUID()
     var name: String
     var symbol: String
-    var value: String = ""
+    var value: String = "1"
+    var isSelected = false
 }
 
 struct FormulaCreationView: View {
@@ -38,6 +40,12 @@ struct FormulaCreationView: View {
         } else {
             VStack {
                 FormulaTextView(text: formulaText)
+                HStack {
+                    Text("Answer")
+                    Spacer()
+                    Text(answer ?? "--").font(.largeTitle)
+                }
+                .padding()
                 VariableListView(input: $formulaText, variables: variables)
                 Spacer()
                 DigitKeyboard(input: $formulaText) {
@@ -46,6 +54,17 @@ struct FormulaCreationView: View {
                 }
             }
         }
+    }
+    
+    var answer: String? {
+        var expression = formulaText
+        for variable in variables {
+            expression = expression.replacingOccurrences(of: variable.symbol, with: variable.value)
+        }
+        guard let answer = try? expression.evaluate() else { return nil }
+        let formatter = NumberFormatter()
+        formatter.maximumSignificantDigits = 12
+        return formatter.string(from: NSNumber(value: answer))
     }
     
     func addNewVariable(name: String) {
@@ -70,8 +89,12 @@ struct VariableListView: View {
                 .frame(width: 80)
                 Text(variable.name)
                 Spacer()
-                Text(variable.value)
+                let hasValue = variable.value.count > 0
+                Text(hasValue ? variable.value : "--")
+                    .font(.largeTitle)
+                    .foregroundColor(hasValue ? .primary : .gray)
             }
+            .listRowBackground(variable.isSelected ? Color.blue : Color.init(white: 100, opacity: 0.0))
         }
         .listStyle(.plain)
     }
@@ -81,8 +104,10 @@ struct FormulaTextView: View {
     var text: String
     var body: some View {
         ScrollView(.horizontal) {
-            Text(text.count < 1 ? " " : text)
+            let hasValue = text.count > 0
+            Text(hasValue ? text : "Enter Formula")
                 .font(.largeTitle)
+                .foregroundColor(hasValue ? .primary : .gray)
                 .flipsForRightToLeftLayoutDirection(true)
                 .environment(\.layoutDirection, .rightToLeft)
         }
