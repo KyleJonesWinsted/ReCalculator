@@ -12,7 +12,6 @@ struct Variable: Identifiable {
     var id = UUID()
     var name: String
     var symbol: String
-    var value: String = "1"
     var isSelected = false
 }
 
@@ -20,9 +19,11 @@ struct FormulaCreationView: View {
     
     @State var formulaText = String()
     @State var variables = [Variable]()
+    @State var variableValues = [String]()
     @State var isAddingVariable = false
     @FocusState var isVariableFieldFocused: Bool
     @State var newVariableName = ""
+    var selectedVariableIndex: Int? { variables.firstIndex { $0.isSelected} }
     
     var body: some View {
         if isAddingVariable {
@@ -39,16 +40,19 @@ struct FormulaCreationView: View {
                 .padding()
         } else {
             VStack {
-                FormulaTextView(text: formulaText)
+                FormulaTextView(text: formulaText, isSelected: variables.filter { $0.isSelected }.count < 1)
+                    .onTapGesture {
+                        clearVariableSelection()
+                    }
                 HStack {
                     Text("Answer")
                     Spacer()
                     Text(answer ?? "--").font(.largeTitle)
                 }
                 .padding()
-                VariableListView(input: $formulaText, variables: variables)
+                VariableListView(input: $formulaText, variables: $variables, variableValues: variableValues)
                 Spacer()
-                DigitKeyboard(input: $formulaText) {
+                DigitKeyboard(input: selectedVariableIndex != nil ? $variableValues[selectedVariableIndex!] : $formulaText) {
                     self.isAddingVariable = true
                     self.isVariableFieldFocused = true
                 }
@@ -56,14 +60,20 @@ struct FormulaCreationView: View {
         }
     }
     
+    func clearVariableSelection() {
+        for i in variables.indices {
+            variables[i].isSelected = false
+        }
+    }
+    
     var answer: String? {
         var expression = formulaText
-        for variable in variables {
-            expression = expression.replacingOccurrences(of: variable.symbol, with: variable.value)
+        for i in variables.indices {
+            expression = expression.replacingOccurrences(of: variables[i].symbol, with: variableValues[i])
         }
         guard let answer = try? expression.evaluate() else { return nil }
         let formatter = NumberFormatter()
-        formatter.maximumSignificantDigits = 12
+        formatter.maximumFractionDigits = 5
         return formatter.string(from: NSNumber(value: answer))
     }
     
@@ -74,25 +84,35 @@ struct FormulaCreationView: View {
             .filter { $0.name.starts(with: String(symbol)) }
             .count
         variables.append(Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])" ))
+        variableValues.append("")
     }
 }
 
 struct VariableListView: View {
     @Binding var input: String
-    var variables: [Variable]
+    @Binding var variables: [Variable]
+    var variableValues: [String]
     var body: some View {
-        List(variables) { variable in
+        List(variables.indices, id: \.self) { i in
+            let variable = variables[i]
+            let value = variableValues[i]
             HStack {
                 DigitButton(label: variable.symbol) {
                     input.append(variable.symbol)
                 }
                 .frame(width: 80)
                 Text(variable.name)
-                Spacer()
-                let hasValue = variable.value.count > 0
-                Text(hasValue ? variable.value : "--")
+                let hasValue = value.count > 0
+                Text(hasValue ? value : "--")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .contentShape(Rectangle())
                     .font(.largeTitle)
                     .foregroundColor(hasValue ? .primary : .gray)
+            }
+            .onTapGesture {
+                for i in variables.indices {
+                    variables[i].isSelected = variables[i].id == variable.id
+                }
             }
             .listRowBackground(variable.isSelected ? Color.blue : Color.init(white: 100, opacity: 0.0))
         }
@@ -102,6 +122,7 @@ struct VariableListView: View {
 
 struct FormulaTextView: View {
     var text: String
+    var isSelected: Bool
     var body: some View {
         ScrollView(.horizontal) {
             let hasValue = text.count > 0
@@ -110,30 +131,10 @@ struct FormulaTextView: View {
                 .foregroundColor(hasValue ? .primary : .gray)
                 .flipsForRightToLeftLayoutDirection(true)
                 .environment(\.layoutDirection, .rightToLeft)
+                .padding()
         }
         .flipsForRightToLeftLayoutDirection(true)
         .environment(\.layoutDirection, .rightToLeft)
-        .padding()
-    }
-}
-
-struct FormulaCreationView_Preview: PreviewProvider {
-    static let devices = [
-        "iPhone SE",
-//        "iPhone 13 mini",
-//        "iPhone 13",
-//        "iPhone 13 Pro Max"
-    ]
-    static var previews: some View {
-        Group {
-            ForEach(devices, id: \.self) { device in
-                FormulaCreationView(formulaText: "2+2",variables: [
-                    Variable(name: "Hello", symbol: "H", value: "42"),
-                    Variable(name: "World", symbol: "W", value: "2")
-                ])
-                    .previewDevice(PreviewDevice(rawValue: device))
-                    .previewDisplayName(device)
-            }
-        }
+        .background(isSelected ? Color.blue : Color.init(white: 100, opacity: 0))
     }
 }
