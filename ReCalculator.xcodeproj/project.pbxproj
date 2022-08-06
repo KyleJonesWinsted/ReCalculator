@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA800E79286754B500D7601E /* ReCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA800E66286754B300D7601E /* ReCalculator.xcdatamodeld */; };
-		DA800E7A286754B500D7601E /* ReCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DA800E66286754B300D7601E /* ReCalculator.xcdatamodeld */; };
+		DA14A1B3287A1A93001DB94B /* FormulaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA14A1B2287A1A93001DB94B /* FormulaController.swift */; };
+		DA14A1B5287A1BD2001DB94B /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA14A1B4287A1BD2001DB94B /* Library.swift */; };
 		DA800E7B286754B500D7601E /* ReCalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E68286754B300D7601E /* ReCalculatorApp.swift */; };
 		DA800E7C286754B500D7601E /* ReCalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E68286754B300D7601E /* ReCalculatorApp.swift */; };
-		DA800E7D286754B500D7601E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E69286754B300D7601E /* ContentView.swift */; };
-		DA800E7E286754B500D7601E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E69286754B300D7601E /* ContentView.swift */; };
-		DA800E7F286754B500D7601E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E6A286754B300D7601E /* Persistence.swift */; };
-		DA800E80286754B500D7601E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E6A286754B300D7601E /* Persistence.swift */; };
+		DA800E7D286754B500D7601E /* FormulaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E69286754B300D7601E /* FormulaListView.swift */; };
+		DA800E7E286754B500D7601E /* FormulaListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA800E69286754B300D7601E /* FormulaListView.swift */; };
 		DA800E81286754B500D7601E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA800E6B286754B500D7601E /* Assets.xcassets */; };
 		DA800E82286754B500D7601E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA800E6B286754B500D7601E /* Assets.xcassets */; };
 		DA800E8D2867578800D7601E /* MathParser in Frameworks */ = {isa = PBXBuildFile; productRef = DA800E8C2867578800D7601E /* MathParser */; };
@@ -26,10 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DA800E67286754B300D7601E /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
+		DA14A1B2287A1A93001DB94B /* FormulaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaController.swift; sourceTree = "<group>"; };
+		DA14A1B4287A1BD2001DB94B /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		DA800E68286754B300D7601E /* ReCalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReCalculatorApp.swift; sourceTree = "<group>"; };
-		DA800E69286754B300D7601E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		DA800E6A286754B300D7601E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		DA800E69286754B300D7601E /* FormulaListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaListView.swift; sourceTree = "<group>"; };
 		DA800E6B286754B500D7601E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA800E70286754B500D7601E /* ReCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA800E76286754B500D7601E /* ReCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,12 +69,12 @@
 			isa = PBXGroup;
 			children = (
 				DA800E68286754B300D7601E /* ReCalculatorApp.swift */,
+				DA14A1B4287A1BD2001DB94B /* Library.swift */,
 				DAB6B66B28709097008502CC /* FormulaCreationView.swift */,
 				DAB6B66E2871046B008502CC /* DigitKeyboardView.swift */,
-				DA800E69286754B300D7601E /* ContentView.swift */,
-				DA800E6A286754B300D7601E /* Persistence.swift */,
+				DA800E69286754B300D7601E /* FormulaListView.swift */,
 				DA800E6B286754B500D7601E /* Assets.xcassets */,
-				DA800E66286754B300D7601E /* ReCalculator.xcdatamodeld */,
+				DA14A1B2287A1A93001DB94B /* FormulaController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -206,12 +204,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA14A1B3287A1A93001DB94B /* FormulaController.swift in Sources */,
 				DA800E7B286754B500D7601E /* ReCalculatorApp.swift in Sources */,
 				DAB6B66C28709097008502CC /* FormulaCreationView.swift in Sources */,
-				DA800E7F286754B500D7601E /* Persistence.swift in Sources */,
 				DAB6B66F2871046C008502CC /* DigitKeyboardView.swift in Sources */,
-				DA800E79286754B500D7601E /* ReCalculator.xcdatamodeld in Sources */,
-				DA800E7D286754B500D7601E /* ContentView.swift in Sources */,
+				DA800E7D286754B500D7601E /* FormulaListView.swift in Sources */,
+				DA14A1B5287A1BD2001DB94B /* Library.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,10 +219,8 @@
 			files = (
 				DA800E7C286754B500D7601E /* ReCalculatorApp.swift in Sources */,
 				DAB6B66D28709097008502CC /* FormulaCreationView.swift in Sources */,
-				DA800E80286754B500D7601E /* Persistence.swift in Sources */,
 				DAB6B6702871046C008502CC /* DigitKeyboardView.swift in Sources */,
-				DA800E7A286754B500D7601E /* ReCalculator.xcdatamodeld in Sources */,
-				DA800E7E286754B500D7601E /* ContentView.swift in Sources */,
+				DA800E7E286754B500D7601E /* FormulaListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,19 +518,6 @@
 			productName = MathParser;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		DA800E66286754B300D7601E /* ReCalculator.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				DA800E67286754B300D7601E /* Shared.xcdatamodel */,
-			);
-			currentVersion = DA800E67286754B300D7601E /* Shared.xcdatamodel */;
-			path = ReCalculator.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = DA800E61286754B300D7601E /* Project object */;
 }

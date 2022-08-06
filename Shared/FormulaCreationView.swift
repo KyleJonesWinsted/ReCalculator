@@ -8,22 +8,22 @@
 import SwiftUI
 import MathParser
 
-struct Variable: Identifiable {
-    var id = UUID()
-    var name: String
-    var symbol: String
-    var isSelected = false
-}
-
 struct FormulaCreationView: View {
     
-    @State var formulaText = String()
-    @State var variables = [Variable]()
-    @State var variableValues = [String]()
+    @EnvironmentObject var formulaController: FormulaController
+    
+    @State var formula: Formula
+    @State var variableValues: [String]
     @State var isAddingVariable = false
     @FocusState var isVariableFieldFocused: Bool
     @State var newVariableName = ""
-    var selectedVariableIndex: Int? { variables.firstIndex { $0.isSelected} }
+    @State var textDidChange = false
+    var selectedVariableIndex: Int? { formula.variables.firstIndex { $0.isSelected} }
+    
+    init(formula: Formula) {
+        _formula = State(initialValue: formula)
+        _variableValues = State(initialValue: Array(repeating: "", count: formula.variables.count))
+    }
     
     var body: some View {
         if isAddingVariable {
@@ -40,7 +40,7 @@ struct FormulaCreationView: View {
                 .padding()
         } else {
             VStack {
-                FormulaTextView(text: formulaText, isSelected: variables.filter { $0.isSelected }.count < 1)
+                FormulaTextView(text: formula.text, isSelected: formula.variables.filter { $0.isSelected }.count < 1)
                     .onTapGesture {
                         clearVariableSelection()
                     }
@@ -50,26 +50,40 @@ struct FormulaCreationView: View {
                     Text(answer ?? "--").font(.largeTitle)
                 }
                 .padding()
-                VariableListView(input: $formulaText, variables: $variables, variableValues: variableValues)
+                VariableListView(input: $formula.text, variables: $formula.variables, variableValues: variableValues)
                 Spacer()
-                DigitKeyboard(input: selectedVariableIndex != nil ? $variableValues[selectedVariableIndex!] : $formulaText) {
+                DigitKeyboard(input: selectedVariableIndex != nil ? $variableValues[selectedVariableIndex!] : $formula.text) {
                     self.isAddingVariable = true
                     self.isVariableFieldFocused = true
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save", action: saveFormula)
+                }
+            }
+            
+        }
+    }
+    
+    func saveFormula() {
+        if let index = formulaController.formulas.firstIndex(where: { $0.id == formula.id }) {
+            formulaController.formulas[index] = formula
+        } else {
+            formulaController.formulas.append(formula)
         }
     }
     
     func clearVariableSelection() {
-        for i in variables.indices {
-            variables[i].isSelected = false
+        for i in formula.variables.indices {
+            formula.variables[i].isSelected = false
         }
     }
     
     var answer: String? {
-        var expression = formulaText
-        for i in variables.indices {
-            expression = expression.replacingOccurrences(of: variables[i].symbol, with: variableValues[i])
+        var expression = formula.text
+        for i in formula.variables.indices {
+            expression = expression.replacingOccurrences(of: formula.variables[i].symbol, with: variableValues[i])
         }
         guard let answer = try? expression.evaluate() else { return nil }
         let formatter = NumberFormatter()
@@ -78,12 +92,11 @@ struct FormulaCreationView: View {
     }
     
     func addNewVariable(name: String) {
-        let subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇",  "₈",  "₉"]
         guard let symbol = name.first else { return }
-        let subIndex = variables
+        let subIndex = formula.variables
             .filter { $0.name.starts(with: String(symbol)) }
             .count
-        variables.append(Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])" ))
+        formula.variables.append(Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])" ))
         variableValues.append("")
     }
 }
@@ -135,6 +148,6 @@ struct FormulaTextView: View {
         }
         .flipsForRightToLeftLayoutDirection(true)
         .environment(\.layoutDirection, .rightToLeft)
-        .background(isSelected ? Color.blue : Color.init(white: 100, opacity: 0))
+        .background(isSelected ? Color.indigo : Color.init(white: 100, opacity: 0))
     }
 }

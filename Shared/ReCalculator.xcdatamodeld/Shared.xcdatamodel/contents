@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Formula" representedClassName="Formula" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="variables" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Variable" inverseName="formula" inverseEntity="Variable"/>
+    </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
+    <entity name="Variable" representedClassName="Variable" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="symbol" optional="YES" attributeType="String"/>
+        <relationship name="formula" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Formula" inverseName="variables" inverseEntity="Formula"/>
+    </entity>
     <elements>
         <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
+        <element name="Formula" positionX="-146.22265625" positionY="99.8046875" width="128" height="74"/>
+        <element name="Variable" positionX="189.41015625" positionY="40.2421875" width="128" height="89"/>
     </elements>
 </model>

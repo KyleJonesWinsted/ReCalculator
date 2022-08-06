@@ -7,15 +7,31 @@
 
 import SwiftUI
 
+/// TODO:
+/// Make Save button only appear when text changed
+/// Dismiss formula creation view when clicking save
+/// Update app colors
+/// Use proper modal view  for adding variables using sheets
+
 @main
 struct ReCalculatorApp: App {
-    let persistenceController = PersistenceController.shared
-
+    
+    @StateObject var formulaController = FormulaController()
+    
     var body: some Scene {
         WindowGroup {
-            FormulaCreationView()
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            FormulaListView(formulas: $formulaController.formulas)
+                .onAppear {
+                    FormulaController.load { result in
+                        switch result {
+                            case .success(let formulas):
+                                formulaController.formulas = formulas
+                            case .failure(let error):
+                                fatalError(error.localizedDescription)
+                        }
+                    }
+                }
+                .environmentObject(formulaController)
         }
     }
 }
