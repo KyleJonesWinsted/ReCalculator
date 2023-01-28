@@ -40,6 +40,7 @@ struct FormulaCreationView: View {
                 .padding()
         } else {
             VStack {
+                Text("")
                 FormulaTextView(text: formula.text, isSelected: formula.variables.filter { $0.isSelected }.count < 1)
                     .onTapGesture {
                         clearVariableSelection()
@@ -50,7 +51,7 @@ struct FormulaCreationView: View {
                     Text(answer ?? "--").font(.largeTitle)
                 }
                 .padding()
-                VariableListView(input: $formula.text, variables: $formula.variables, variableValues: variableValues)
+                VariableListView(input: $formula.text, variables: $formula.variables, selectedIndex: selectedVariableIndex, variableValues: variableValues)
                 Spacer()
                 DigitKeyboard(input: selectedVariableIndex != nil ? $variableValues[selectedVariableIndex!] : $formula.text) {
                     self.isAddingVariable = true
@@ -59,7 +60,7 @@ struct FormulaCreationView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save", action: saveFormula)
+                    Button("Save", action: saveFormula).foregroundColor(.accentBlue)
                 }
             }
             
@@ -104,30 +105,32 @@ struct FormulaCreationView: View {
 struct VariableListView: View {
     @Binding var input: String
     @Binding var variables: [Variable]
+    var selectedIndex: Int?
     var variableValues: [String]
     var body: some View {
         List(variables.indices, id: \.self) { i in
             let variable = variables[i]
             let value = variableValues[i]
+            let isSelected = i == selectedIndex
             HStack {
                 DigitButton(label: variable.symbol) {
                     input.append(variable.symbol)
                 }
                 .frame(width: 80)
-                Text(variable.name)
+                Text(variable.name).foregroundColor(isSelected ? .black : .primary)
                 let hasValue = value.count > 0
                 Text(hasValue ? value : "--")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .contentShape(Rectangle())
                     .font(.largeTitle)
-                    .foregroundColor(hasValue ? .primary : .gray)
+                    .foregroundColor(hasValue ? isSelected ? .black : .primary : .gray)
             }
             .onTapGesture {
                 for i in variables.indices {
                     variables[i].isSelected = variables[i].id == variable.id
                 }
             }
-            .listRowBackground(variable.isSelected ? Color.blue : Color.init(white: 100, opacity: 0.0))
+            .listRowBackground(variable.isSelected ? Color.selection : Color.init(white: 100, opacity: 0.0))
         }
         .listStyle(.plain)
     }
@@ -141,13 +144,13 @@ struct FormulaTextView: View {
             let hasValue = text.count > 0
             Text(hasValue ? text : "Enter Formula")
                 .font(.largeTitle)
-                .foregroundColor(hasValue ? .primary : .gray)
+                .foregroundColor(hasValue ? isSelected ? .black : .primary : .gray)
                 .flipsForRightToLeftLayoutDirection(true)
                 .environment(\.layoutDirection, .rightToLeft)
                 .padding()
         }
         .flipsForRightToLeftLayoutDirection(true)
         .environment(\.layoutDirection, .rightToLeft)
-        .background(isSelected ? Color.indigo : Color.init(white: 100, opacity: 0))
+        .background(isSelected ? Color.selection : Color.init(white: 100, opacity: 0))
     }
 }

@@ -25,17 +25,17 @@ struct DigitKeyboard: View {
         "(","0",".", ")"
     ]
     let colors: [String: Color] = [
-        "×": .orange,
-        "-": .orange,
-        "+": .orange,
-        "(": .mint,
-        ")": .mint,
-        ".": .mint,
+        "×": .buttonOperator,
+        "-": .buttonOperator,
+        "+": .buttonOperator,
+        "(": .buttonAccent,
+        ")": .buttonAccent,
+        ".": .buttonAccent,
     ]
     var body: some View {
         LazyVGrid(columns: columns) {
             let subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇",  "₈",  "₉"]
-            DigitButton(label: "←", color: .orange) {
+            DigitButton(label: "←", color: .buttonOperator) {
                 guard let last = input.last else { return }
                 if subscripts.contains(String(last)) {
                     input.removeLast()
@@ -45,10 +45,10 @@ struct DigitKeyboard: View {
             AddVariableButton(width: self.info.columnWidth(1) * 2 + self.info.spacing(1), addVariable: addVariable)
                 .frame(maxWidth: .infinity)
             Text("")
-            DigitButton(label: "÷", color: .orange) { input.append("÷") }
+            DigitButton(label: "÷", color: .buttonOperator) { input.append("÷") }
             ForEach(0..<labels.count, id: \.self) { idx in
                 let digit = labels[idx]
-                DigitButton(label: digit, color: colors[digit] ?? .gray) { input.append(digit) }
+                DigitButton(label: digit, color: colors[digit] ?? .buttonGray) { input.append(digit) }
                     .gridInfoId(idx)
             }
         }
@@ -69,7 +69,7 @@ struct AddVariableButton: View {
                 .frame(width: width, height: 53)
         }
         .frame(width: width)
-        .buttonStyle(DigitButtonStyle(color: .mint))
+        .buttonStyle(DigitButtonStyle(color: .buttonAccent))
     }
 }
 
@@ -77,7 +77,7 @@ struct AddVariableButton: View {
 struct DigitButton: View {
     
     var label: String
-    var color = Color.gray
+    var color = Color.buttonGray
     
     var onClick: () -> Void
     
@@ -96,12 +96,12 @@ struct DigitButton: View {
 }
 
 struct DigitButtonStyle: ButtonStyle {
-    var color = Color.gray
+    var color = Color.buttonGray
     func makeBody(configuration: Configuration) -> some View {
         configuration
             .label
             .foregroundColor(.white)
-            .background(configuration.isPressed ? .blue : color)
+            .background(configuration.isPressed ? .selection : color)
             .cornerRadius(30)
             .padding(1)
     }

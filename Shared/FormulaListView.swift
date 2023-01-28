@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FormulaListView: View {
+    
     @Binding var formulas: [Formula]
     @State var isNewFormulaViewVisible = false
     var body: some View {
@@ -35,6 +36,7 @@ struct FormulaListView: View {
             }
             
         }
+        .tint(.accentBlue)
     }
     
     func openNewFormula() {
