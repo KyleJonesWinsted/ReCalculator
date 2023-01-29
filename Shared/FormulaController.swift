@@ -35,7 +35,7 @@ final class FormulaController: ObservableObject {
                 let fileUrl = try fileURL()
                 guard let file = try? FileHandle(forReadingFrom: fileUrl) else {
                     DispatchQueue.main.async {
-                        completion(.success([]))
+                        completion(.success(defaultFormulas))
                     }
                     return
                 }
@@ -67,5 +67,7 @@ final class FormulaController: ObservableObject {
             }
         }
     }
+
+    static private var defaultFormulas: [Formula] = []
 
 }

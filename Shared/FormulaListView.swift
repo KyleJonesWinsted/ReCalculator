@@ -11,6 +11,8 @@ struct FormulaListView: View {
 
     @Binding var formulas: [Formula]
     @State var isNewFormulaViewVisible = false
+    @EnvironmentObject var formulaController: FormulaController
+
     var body: some View {
         NavigationView {
             VStack {
@@ -30,7 +32,11 @@ struct FormulaListView: View {
                             Text(formula.text)
                         }
                     }
-                    // TODO: onMove onDelete
+                    .onDelete(perform: deleteFormula)
+                    .onMove(perform: moveFormula)
+                }
+                .toolbar {
+                    EditButton()
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -44,6 +50,14 @@ struct FormulaListView: View {
 
         }
         .tint(.accentBlue)
+    }
+
+    func deleteFormula(indexSet: IndexSet) {
+        formulaController.formulas.remove(atOffsets: indexSet)
+    }
+
+    func moveFormula(indexSet: IndexSet, offset: Int) {
+        formulaController.formulas.move(fromOffsets: indexSet, toOffset: offset)
     }
 
     func openNewFormula() {

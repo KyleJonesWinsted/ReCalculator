@@ -77,10 +77,18 @@ struct FormulaCreationView: View {
     }
 
     func saveFormula() {
+        selectVariable(index: 0)
         if let index = formulaController.formulas.firstIndex(where: { $0.id == formula.id }) {
             formulaController.formulas[index] = formula
         } else {
             formulaController.formulas.append(formula)
+        }
+    }
+
+    func selectVariable(index: Int) {
+        clearVariableSelection()
+        if formula.variables.count > index {
+            formula.variables[index].isSelected = true
         }
     }
 
@@ -110,6 +118,7 @@ struct FormulaCreationView: View {
         formula.variables.append(
             Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])"))
         variableValues.append("")
+        selectVariable(index: formula.variables.endIndex - 1)
     }
 }
 
@@ -122,19 +131,18 @@ struct VariableListView: View {
         List(variables.indices, id: \.self) { i in
             let variable = variables[i]
             let value = variableValues[i]
-            let isSelected = i == selectedIndex
             HStack {
                 DigitButton(label: variable.symbol) {
                     input.append(variable.symbol)
                 }
                 .frame(width: 80)
-                Text(variable.name).foregroundColor(isSelected ? .black : .primary)
+                Text(variable.name).foregroundColor(variable.isSelected ? .black : .primary)
                 let hasValue = value.count > 0
                 Text(hasValue ? value : "--")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .contentShape(Rectangle())
                     .font(.largeTitle)
-                    .foregroundColor(hasValue ? isSelected ? .black : .primary : .gray)
+                    .foregroundColor(hasValue ? variable.isSelected ? .black : .primary : .gray)
             }
             .onTapGesture {
                 for i in variables.indices {
