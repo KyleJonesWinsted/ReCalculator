@@ -17,6 +17,7 @@
 		DA800E82286754B500D7601E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA800E6B286754B500D7601E /* Assets.xcassets */; };
 		DA800E8D2867578800D7601E /* MathParser in Frameworks */ = {isa = PBXBuildFile; productRef = DA800E8C2867578800D7601E /* MathParser */; };
 		DA800E90286757AA00D7601E /* MathParser in Frameworks */ = {isa = PBXBuildFile; productRef = DA800E8F286757AA00D7601E /* MathParser */; };
+		DA93037F2987081B0050952D /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = DA93037E2987081B0050952D /* .swiftformat */; };
 		DAB6B66C28709097008502CC /* FormulaCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6B66B28709097008502CC /* FormulaCreationView.swift */; };
 		DAB6B66D28709097008502CC /* FormulaCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6B66B28709097008502CC /* FormulaCreationView.swift */; };
 		DAB6B66F2871046C008502CC /* DigitKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB6B66E2871046B008502CC /* DigitKeyboardView.swift */; };
@@ -32,6 +33,7 @@
 		DA800E70286754B500D7601E /* ReCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA800E76286754B500D7601E /* ReCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA800E78286754B500D7601E /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		DA93037E2987081B0050952D /* .swiftformat */ = {isa = PBXFileReference; explicitFileType = text.json; path = .swiftformat; sourceTree = "<group>"; };
 		DAB6B66B28709097008502CC /* FormulaCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaCreationView.swift; sourceTree = "<group>"; };
 		DAB6B66E2871046B008502CC /* DigitKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitKeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 			children = (
 				DA800E68286754B300D7601E /* ReCalculatorApp.swift */,
 				DA14A1B4287A1BD2001DB94B /* Library.swift */,
+				DA93037E2987081B0050952D /* .swiftformat */,
 				DAB6B66B28709097008502CC /* FormulaCreationView.swift */,
 				DAB6B66E2871046B008502CC /* DigitKeyboardView.swift */,
 				DA800E69286754B300D7601E /* FormulaListView.swift */,
@@ -148,7 +151,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					DA800E6F286754B500D7601E = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -186,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA93037F2987081B0050952D /* .swiftformat in Resources */,
 				DA800E81286754B500D7601E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +221,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/homebrew/bin/swift-format format -i -r ${PROJECT_DIR}\n";
+			shellScript = "/opt/homebrew/bin/swift-format format -i -r ${PROJECT_DIR} --configuration ${PROJECT_DIR}/Shared/.swiftformat\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -282,6 +286,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -340,6 +345,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -427,9 +433,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 25DUYVKN98;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -455,9 +463,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 25DUYVKN98;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

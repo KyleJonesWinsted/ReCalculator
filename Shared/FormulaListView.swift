@@ -9,41 +9,44 @@ import SwiftUI
 
 struct FormulaListView: View {
 
-  @Binding var formulas: [Formula]
-  @State var isNewFormulaViewVisible = false
-  var body: some View {
-    NavigationView {
-      VStack {
-        NavigationLink(isActive: $isNewFormulaViewVisible) {
-          FormulaCreationView(formula: Formula(text: "", variables: []))
-            .navigationBarTitleDisplayMode(.inline)
-        } label: {
-          EmptyView()
-        }
+    @Binding var formulas: [Formula]
+    @State var isNewFormulaViewVisible = false
+    var body: some View {
+        NavigationView {
+            VStack {
+                NavigationLink(isActive: $isNewFormulaViewVisible) {
+                    FormulaCreationView(formula: Formula(text: "", variables: []))
+                        .navigationBarTitleDisplayMode(.inline)
+                } label: {
+                    EmptyView()
+                }
 
-        List(formulas) { formula in
-          NavigationLink {
-            FormulaCreationView(formula: formula)
-              .navigationBarTitleDisplayMode(.inline)
-          } label: {
-            Text(formula.text)
-          }
-        }
-        .toolbar {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: openNewFormula) {
-              Image(systemName: "plus")
+                List {
+                    ForEach(formulas) { formula in
+                        NavigationLink {
+                            FormulaCreationView(formula: formula)
+                                .navigationBarTitleDisplayMode(.inline)
+                        } label: {
+                            Text(formula.text)
+                        }
+                    }
+                    // TODO: onMove onDelete
+                }
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: openNewFormula) {
+                            Image(systemName: "plus")
+                        }
+                    }
+                }
+                .navigationTitle("Formulas")
             }
-          }
+
         }
-        .navigationTitle("Formulas")
-      }
-
+        .tint(.accentBlue)
     }
-    .tint(.accentBlue)
-  }
 
-  func openNewFormula() {
-    isNewFormulaViewVisible = true
-  }
+    func openNewFormula() {
+        isNewFormulaViewVisible = true
+    }
 }
