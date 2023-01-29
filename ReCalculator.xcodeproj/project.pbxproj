@@ -106,6 +106,7 @@
 				DA800E6C286754B500D7601E /* Sources */,
 				DA800E6D286754B500D7601E /* Frameworks */,
 				DA800E6E286754B500D7601E /* Resources */,
+				DA32EC552986FEF1000059EE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -198,6 +199,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DA32EC552986FEF1000059EE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/homebrew/bin/swift-format format -i -r ${PROJECT_DIR}\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DA800E6C286754B500D7601E /* Sources */ = {

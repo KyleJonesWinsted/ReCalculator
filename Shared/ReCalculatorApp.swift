@@ -15,23 +15,23 @@ import SwiftUI
 
 @main
 struct ReCalculatorApp: App {
-    
-    @StateObject var formulaController = FormulaController()
-    
-    var body: some Scene {
-        WindowGroup {
-            FormulaListView(formulas: $formulaController.formulas)
-                .onAppear {
-                    FormulaController.load { result in
-                        switch result {
-                            case .success(let formulas):
-                                formulaController.formulas = formulas
-                            case .failure(let error):
-                                fatalError(error.localizedDescription)
-                        }
-                    }
-                }
-                .environmentObject(formulaController)
+
+  @StateObject var formulaController = FormulaController()
+
+  var body: some Scene {
+    WindowGroup {
+      FormulaListView(formulas: $formulaController.formulas)
+        .onAppear {
+          FormulaController.load { result in
+            switch result {
+            case .success(let formulas):
+              formulaController.formulas = formulas
+            case .failure(let error):
+              fatalError(error.localizedDescription)
+            }
+          }
         }
+        .environmentObject(formulaController)
     }
+  }
 }
