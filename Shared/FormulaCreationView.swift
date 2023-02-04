@@ -49,7 +49,7 @@ struct FormulaCreationView: View {
                     clearVariableSelection()
                 }
                 HStack {
-                    Text("Answer")
+                    Text("Result")
                     Spacer()
                     Text(answer ?? "--").font(.largeTitle)
                 }
@@ -57,19 +57,26 @@ struct FormulaCreationView: View {
                 VariableListView(
                     input: $formula.text, variables: $formula.variables,
                     selectedIndex: selectedVariableIndex,
-                    variableValues: variableValues)
+                    variableValues: variableValues
+                )
+                .overlay(Divider(), alignment: .bottom)
+                .overlay(Divider(), alignment: .top)
                 Spacer()
                 DigitKeyboard(
                     input: selectedVariableIndex != nil
-                        ? $variableValues[selectedVariableIndex!] : $formula.text
-                ) {
-                    self.isAddingVariable = true
-                    self.isVariableFieldFocused = true
-                }
+                        ? $variableValues[selectedVariableIndex!] : $formula.text,
+                    addVariable: {
+                        self.isAddingVariable = true
+                        self.isVariableFieldFocused = true
+                    })
+
             }
+            .onChange(of: formula.text, perform: { _ in textDidChange = true })
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save", action: saveFormula).foregroundColor(.accentBlue)
+                    if textDidChange {
+                        Button("Save", action: saveFormula).foregroundColor(.accentBlue)
+                    }
                 }
             }
 
@@ -81,7 +88,7 @@ struct FormulaCreationView: View {
         if let index = formulaController.formulas.firstIndex(where: { $0.id == formula.id }) {
             formulaController.formulas[index] = formula
         } else {
-            formulaController.formulas.append(formula)
+            formulaController.formulas.insert(formula, at: 0)
         }
     }
 
@@ -115,10 +122,11 @@ struct FormulaCreationView: View {
         let subIndex = formula.variables
             .filter { $0.name.starts(with: String(symbol)) }
             .count
-        formula.variables.append(
-            Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])"))
-        variableValues.append("")
-        selectVariable(index: formula.variables.endIndex - 1)
+        formula.variables.insert(
+            Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])"),
+            at: 0)
+        variableValues.insert("", at: 0)
+        selectVariable(index: 0)
     }
 }
 

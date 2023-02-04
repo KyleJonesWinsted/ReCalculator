@@ -8,9 +8,8 @@
 import SwiftUI
 
 /// TODO:
-/// Make Save button only appear when text changed
 /// Add formula names, enter name when saving new formula
-/// Use proper modal view  for adding variables using sheets?
+/// Use proper modal view for adding variables using sheets
 
 @main
 struct ReCalculatorApp: App {

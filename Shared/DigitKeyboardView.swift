@@ -32,6 +32,7 @@ struct DigitKeyboard: View {
         ".": .buttonAccent,
     ]
     var body: some View {
+
         LazyVGrid(columns: columns) {
             let subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
             DigitButton(label: "←", color: .buttonOperator) {
@@ -42,7 +43,8 @@ struct DigitKeyboard: View {
                 input.removeLast()
             }
             AddVariableButton(
-                width: self.info.columnWidth(1) * 2 + self.info.spacing(1), addVariable: addVariable
+                width: self.info.columnWidth(1) * 2 + self.info.spacing(1),
+                addVariable: addVariable
             )
             .frame(maxWidth: .infinity)
             Text("")
@@ -57,6 +59,7 @@ struct DigitKeyboard: View {
         }
         .gridInfo($info)
         .padding(10)
+
     }
 }
 
