@@ -15,6 +15,7 @@ import SwiftUI
 struct ReCalculatorApp: App {
 
     @StateObject var formulaController = FormulaController()
+    @State var alertPresented = false
 
     var body: some Scene {
         WindowGroup {
@@ -25,10 +26,15 @@ struct ReCalculatorApp: App {
                         case .success(let formulas):
                             formulaController.formulas = formulas
                         case .failure(let error):
-                            fatalError(error.localizedDescription)
+                            print(error)
+                            alertPresented = true
                         }
                     }
                 }
+                .alert(
+                    "Error Loading Formulas", isPresented: $alertPresented,
+                    actions: {}
+                )
                 .environmentObject(formulaController)
         }
     }

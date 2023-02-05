@@ -17,7 +17,7 @@ final class FormulaController: ObservableObject {
         didSet {
             FormulaController.save(formulas: formulas) { result in
                 if case .failure(let error) = result {
-                    fatalError(error.localizedDescription)
+                    print("failed to save formulas", error.localizedDescription)
                 }
             }
         }

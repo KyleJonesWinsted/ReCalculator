@@ -34,7 +34,6 @@ struct DigitKeyboard: View {
     var body: some View {
 
         LazyVGrid(columns: columns) {
-            let subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
             DigitButton(label: "←", color: .buttonOperator) {
                 guard let last = input.last else { return }
                 if subscripts.contains(String(last)) {
@@ -43,7 +42,7 @@ struct DigitKeyboard: View {
                 input.removeLast()
             }
             AddVariableButton(
-                width: self.info.columnWidth(1) * 2 + self.info.spacing(1),
+                width: info.columnWidth(1) * 2 + info.spacing(1),
                 addVariable: addVariable
             )
             .frame(maxWidth: .infinity)

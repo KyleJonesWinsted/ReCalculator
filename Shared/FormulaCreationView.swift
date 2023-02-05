@@ -114,6 +114,7 @@ struct FormulaCreationView: View {
         guard let answer = try? expression.evaluate() else { return nil }
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 5
+        formatter.numberStyle = .decimal
         return formatter.string(from: NSNumber(value: answer))
     }
 
@@ -126,7 +127,7 @@ struct FormulaCreationView: View {
             Variable(name: name, symbol: "\(symbol)\(subscripts[subIndex % subscripts.count])"),
             at: 0)
         variableValues.insert("", at: 0)
-        selectVariable(index: 0)
+        clearVariableSelection()
     }
 }
 
