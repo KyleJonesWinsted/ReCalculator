@@ -8,8 +8,9 @@
 import SwiftUI
 
 /// TODO:
-/// Add formula names, enter name when saving new formula
-/// Use proper modal view for adding variables using sheets
+/// Add default formulas
+/// Add app icon
+/// Add store info (description, images, privacy policy, etc.)
 
 @main
 struct ReCalculatorApp: App {

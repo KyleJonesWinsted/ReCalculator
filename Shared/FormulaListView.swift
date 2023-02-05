@@ -30,8 +30,12 @@ struct FormulaListView: View {
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
                             VStack {
-                                Text(formula.name).font(.title3).fontWeight(.bold)
+                                Text(formula.name)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 Text(formula.text)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
                     }

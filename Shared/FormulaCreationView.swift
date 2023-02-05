@@ -64,9 +64,11 @@ struct FormulaCreationView: View {
                 HStack {
                     Text("Result")
                     Spacer()
-                    Text(answer ?? "--").font(.largeTitle)
+                    Text(answer ?? "--")
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
                 }
-                .padding()
+                .padding([.leading, .trailing])
                 VariableListView(
                     input: $formula.text, variables: $formula.variables,
                     selectedIndex: selectedVariableIndex,
