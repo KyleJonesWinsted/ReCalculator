@@ -17,7 +17,7 @@ struct FormulaListView: View {
         NavigationView {
             VStack {
                 NavigationLink(isActive: $isNewFormulaViewVisible) {
-                    FormulaCreationView(formula: Formula(text: "", variables: []))
+                    FormulaCreationView(formula: Formula(text: "", name: "", variables: []))
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     EmptyView()
@@ -29,7 +29,10 @@ struct FormulaListView: View {
                             FormulaCreationView(formula: formula)
                                 .navigationBarTitleDisplayMode(.inline)
                         } label: {
-                            Text(formula.text)
+                            VStack {
+                                Text(formula.name).font(.title3).fontWeight(.bold)
+                                Text(formula.text)
+                            }
                         }
                     }
                     .onDelete(perform: deleteFormula)

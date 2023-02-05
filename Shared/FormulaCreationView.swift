@@ -15,7 +15,9 @@ struct FormulaCreationView: View {
     @State var formula: Formula
     @State var variableValues: [String]
     @State var isAddingVariable = false
+    @State var isSavingFormula = false
     @FocusState var isVariableFieldFocused: Bool
+    @FocusState var isFormulaNameFocused: Bool
     @State var newVariableName = ""
     @State var textDidChange = false
     var selectedVariableIndex: Int? { formula.variables.firstIndex { $0.isSelected } }
@@ -26,18 +28,29 @@ struct FormulaCreationView: View {
     }
 
     var body: some View {
+
         if isAddingVariable {
-            TextField("New Variable Name", text: $newVariableName)
-                .onSubmit {
+            SingleInputForm(
+                title: "Variable Name",
+                placeholder: "New Variable Name",
+                text: $newVariableName,
+                isFocused: _isVariableFieldFocused
+            ) {
+                withAnimation {
                     addNewVariable(name: newVariableName)
                     isAddingVariable = false
                     newVariableName = ""
                 }
-                .disableAutocorrection(true)
-                .font(.title)
-                .submitLabel(.done)
-                .focused($isVariableFieldFocused)
-                .padding()
+            }
+        } else if isSavingFormula {
+            SingleInputForm(
+                title: "Formula Name",
+                placeholder: "New Formula Name",
+                text: $formula.name, isFocused: _isFormulaNameFocused
+            ) {
+                isSavingFormula = false
+                saveFormula()
+            }
         } else {
             VStack {
                 Text("")
@@ -66,8 +79,10 @@ struct FormulaCreationView: View {
                     input: selectedVariableIndex != nil
                         ? $variableValues[selectedVariableIndex!] : $formula.text,
                     addVariable: {
-                        self.isAddingVariable = true
-                        self.isVariableFieldFocused = true
+                        withAnimation {
+                            self.isAddingVariable = true
+                            self.isVariableFieldFocused = true
+                        }
                     })
 
             }
@@ -75,16 +90,28 @@ struct FormulaCreationView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if textDidChange {
-                        Button("Save", action: saveFormula).foregroundColor(.accentBlue)
+                        Button("Save", action: openSaveDialog).foregroundColor(
+                            .accentBlue)
                     }
                 }
             }
+            .navigationTitle(formula.name)
 
         }
     }
 
+    func openSaveDialog() {
+        withAnimation {
+            isSavingFormula = true
+            isFormulaNameFocused = true
+        }
+    }
+
     func saveFormula() {
+        textDidChange = false
         selectVariable(index: 0)
+        formula.name = formula.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        formula.text = formula.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if let index = formulaController.formulas.firstIndex(where: { $0.id == formula.id }) {
             formulaController.formulas[index] = formula
         } else {
@@ -128,6 +155,30 @@ struct FormulaCreationView: View {
             at: 0)
         variableValues.insert("", at: 0)
         clearVariableSelection()
+    }
+
+}
+
+struct SingleInputForm: View {
+    var title: String
+    var placeholder: String
+    @Binding var text: String
+    @FocusState var isFocused: Bool
+    var onSubmit: () -> Void
+
+    var body: some View {
+        Form {
+            Section(title) {
+                TextField(placeholder, text: $text)
+                    .onSubmit(onSubmit)
+                    .disableAutocorrection(true)
+                    .font(.title)
+                    .submitLabel(.done)
+                    .focused($isFocused)
+                    .padding([.top, .bottom], 10)
+            }
+        }
+        .transition(.move(edge: .bottom))
     }
 }
 

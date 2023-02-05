@@ -26,6 +26,7 @@ struct Variable: Identifiable, Codable {
 struct Formula: Identifiable, Codable {
     var id = UUID()
     var text: String
+    var name: String
     var variables: [Variable]
 }
 
