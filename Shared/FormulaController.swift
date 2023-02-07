@@ -70,7 +70,7 @@ final class FormulaController: ObservableObject {
 
     static private var defaultFormulas: [Formula] = [
         Formula(
-            text: "(M₀ + (M₀ * (T₀ ÷ 100))) ÷ P₀", name: "Split a Meal",
+            text: "(M₀ + (M₀ × (T₀ ÷ 100))) ÷ P₀", name: "Split a Meal",
             variables: [
                 Variable(name: "Meal Total", symbol: "M₀"),
                 Variable(name: "Tip Percent", symbol: "T₀"),
