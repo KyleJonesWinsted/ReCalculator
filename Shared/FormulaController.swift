@@ -72,21 +72,21 @@ final class FormulaController: ObservableObject {
         Formula(
             text: "(M₀ + (M₀ × (T₀ ÷ 100))) ÷ P₀", name: "Split a Meal",
             variables: [
-                Variable(name: "Meal Total", symbol: "M₀"),
+                Variable(name: "Meal Total", symbol: "M₀", isSelected: true),
                 Variable(name: "Tip Percent", symbol: "T₀"),
                 Variable(name: "People", symbol: "P₀"),
             ]),
         Formula(
             text: "T₀ ÷ (1 + T₁ ÷ 100)", name: "Total without Tax",
             variables: [
-                Variable(name: "Total", symbol: "T₀"),
+                Variable(name: "Total", symbol: "T₀", isSelected: true),
                 Variable(name: "Tax Percent", symbol: "T₁"),
             ]),
         Formula(
             text: "((B₀ + (T₀ × 2)) ÷ (3 × (T₀ + B₀))) × H₀",
             name: "Center of Gravity",
             variables: [
-                Variable(name: "Base Width", symbol: "B₀"),
+                Variable(name: "Base Width", symbol: "B₀", isSelected: true),
                 Variable(name: "Top Width", symbol: "T₀"),
                 Variable(name: "Height", symbol: "H₀"),
             ]),
