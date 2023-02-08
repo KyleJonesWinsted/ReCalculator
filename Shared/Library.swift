@@ -20,7 +20,6 @@ struct Variable: Identifiable, Codable {
     var id = UUID()
     var name: String
     var symbol: String
-    var isSelected = false
 }
 
 struct Formula: Identifiable, Codable {

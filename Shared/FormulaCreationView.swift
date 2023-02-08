@@ -20,11 +20,12 @@ struct FormulaCreationView: View {
     @FocusState var isFormulaNameFocused: Bool
     @State var newVariableName = ""
     @State var textDidChange = false
-    var selectedVariableIndex: Int? { formula.variables.firstIndex { $0.isSelected } }
+    @State var selectedVariableIndex: Int?
 
     init(formula: Formula) {
         _formula = State(initialValue: formula)
         _variableValues = State(initialValue: Array(repeating: "", count: formula.variables.count))
+        _selectedVariableIndex = State(initialValue: formula.variables.count > 0 ? 0 : nil)
     }
 
     var body: some View {
@@ -56,7 +57,7 @@ struct FormulaCreationView: View {
                 Text("")
                 FormulaTextView(
                     text: formula.text,
-                    isSelected: formula.variables.filter { $0.isSelected }.count < 1
+                    isSelected: selectedVariableIndex == nil
                 )
                 .onTapGesture {
                     clearVariableSelection()
@@ -71,7 +72,7 @@ struct FormulaCreationView: View {
                 .padding([.leading, .trailing])
                 VariableListView(
                     input: $formula.text, variables: $formula.variables,
-                    selectedIndex: selectedVariableIndex,
+                    selectedIndex: $selectedVariableIndex,
                     variableValues: variableValues
                 )
                 .overlay(Divider(), alignment: .bottom)
@@ -124,14 +125,12 @@ struct FormulaCreationView: View {
     func selectVariable(index: Int) {
         clearVariableSelection()
         if formula.variables.count > index {
-            formula.variables[index].isSelected = true
+            selectedVariableIndex = index
         }
     }
 
     func clearVariableSelection() {
-        for i in formula.variables.indices {
-            formula.variables[i].isSelected = false
-        }
+        selectedVariableIndex = nil
     }
 
     var answer: String? {
@@ -187,7 +186,7 @@ struct SingleInputForm: View {
 struct VariableListView: View {
     @Binding var input: String
     @Binding var variables: [Variable]
-    var selectedIndex: Int?
+    @Binding var selectedIndex: Int?
     var variableValues: [String]
     var body: some View {
         List(variables.indices, id: \.self) { i in
@@ -198,21 +197,19 @@ struct VariableListView: View {
                     input.append(variable.symbol)
                 }
                 .frame(width: 80)
-                Text(variable.name).foregroundColor(variable.isSelected ? .black : .primary)
+                Text(variable.name).foregroundColor(i == selectedIndex ? .black : .primary)
                 let hasValue = value.count > 0
                 Text(hasValue ? value : "--")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .contentShape(Rectangle())
                     .font(.largeTitle)
-                    .foregroundColor(hasValue ? variable.isSelected ? .black : .primary : .gray)
+                    .foregroundColor(hasValue ? i == selectedIndex ? .black : .primary : .gray)
             }
             .onTapGesture {
-                for i in variables.indices {
-                    variables[i].isSelected = variables[i].id == variable.id
-                }
+                selectedIndex = i
             }
             .listRowBackground(
-                variable.isSelected ? Color.selection : Color.init(white: 100, opacity: 0.0))
+                i == selectedIndex ? Color.selection : Color.init(white: 100, opacity: 0.0))
         }
         .listStyle(.plain)
     }
