@@ -10,14 +10,14 @@ import SwiftUI
 
 struct FormulaCreationView: View {
 
-    @EnvironmentObject var formulaController: FormulaController
-
+    @Environment(\.modelContext) var modelContext
+    
     @State var formula: Formula
     @State var variableValues: [String]
     @State var isAddingVariable = false
     @State var isSavingFormula = false
-    @FocusState var isVariableFieldFocused: Bool
-    @FocusState var isFormulaNameFocused: Bool
+    @FocusState var isVariableFieldFocused
+    @FocusState var isFormulaNameFocused
     @State var newVariableName = ""
     @State var textDidChange = false
     @State var selectedVariableIndex: Int?
@@ -47,7 +47,8 @@ struct FormulaCreationView: View {
             SingleInputForm(
                 title: "Formula Name",
                 placeholder: "New Formula Name",
-                text: $formula.name, isFocused: _isFormulaNameFocused
+                text: $formula.name,
+                isFocused: _isFormulaNameFocused
             ) {
                 isSavingFormula = false
                 saveFormula()
@@ -89,7 +90,7 @@ struct FormulaCreationView: View {
                     })
 
             }
-            .onChange(of: formula.text, perform: { _ in textDidChange = true })
+            .onChange(of: formula.text) { textDidChange = true }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     if textDidChange {
@@ -115,11 +116,7 @@ struct FormulaCreationView: View {
         selectVariable(index: 0)
         formula.name = formula.name.trimmingCharacters(in: .whitespacesAndNewlines)
         formula.text = formula.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let index = formulaController.formulas.firstIndex(where: { $0.id == formula.id }) {
-            formulaController.formulas[index] = formula
-        } else {
-            formulaController.formulas.insert(formula, at: 0)
-        }
+        modelContext.insert(formula)
     }
 
     func selectVariable(index: Int) {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 let subscripts = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
 
@@ -22,11 +23,19 @@ struct Variable: Identifiable, Codable {
     var symbol: String
 }
 
-struct Formula: Identifiable, Codable {
+@Model
+final class Formula: Identifiable {
     var id = UUID()
     var text: String
     var name: String
     var variables: [Variable]
+    
+    init(text: String, name: String, variables: [Variable] = []) {
+        self.id = UUID()
+        self.text = text
+        self.name = name
+        self.variables = variables
+    }
 }
 
 extension Color {

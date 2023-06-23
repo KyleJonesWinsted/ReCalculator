@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "7875DB5D-A0EA-469E-89F8-00B8C54ABA87"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Shared/FormulaListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "openNewFormula()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2 - 9cbdbe3d53fe6f53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ReCalculator.FormulaListView.openNewFormula() -&gt; ()"
+                  moduleName = "ReCalculator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kylejones/Desktop/ReCalculator/Shared/FormulaListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2 - 9cbdbe3d53fe68b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ReCalculator.FormulaListView.openNewFormula() -&gt; ()"
+                  moduleName = "ReCalculator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kylejones/Desktop/ReCalculator/Shared/FormulaListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

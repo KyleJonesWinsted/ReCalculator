@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FormulaListView: View {
 
-    @Binding var formulas: [Formula]
+    @Query var formulas: [Formula]
     @State var isNewFormulaViewVisible = false
-    @EnvironmentObject var formulaController: FormulaController
+    @Environment(\.modelContext) var modelContext
 
     var body: some View {
         NavigationView {
@@ -40,7 +41,7 @@ struct FormulaListView: View {
                         }
                     }
                     .onDelete(perform: deleteFormula)
-                    .onMove(perform: moveFormula)
+//                    .onMove(perform: moveFormula)
                 }
                 .toolbar {
                     EditButton()
@@ -60,12 +61,14 @@ struct FormulaListView: View {
     }
 
     func deleteFormula(indexSet: IndexSet) {
-        formulaController.formulas.remove(atOffsets: indexSet)
+        for index in indexSet {
+            modelContext.delete(formulas[index])
+        }
     }
 
-    func moveFormula(indexSet: IndexSet, offset: Int) {
-        formulaController.formulas.move(fromOffsets: indexSet, toOffset: offset)
-    }
+//    func moveFormula(indexSet: IndexSet, offset: Int) {
+//        formulas.move(fromOffsets: indexSet, toOffset: offset)
+//    }
 
     func openNewFormula() {
         isNewFormulaViewVisible = true
