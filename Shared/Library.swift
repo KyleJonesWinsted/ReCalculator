@@ -29,12 +29,14 @@ final class Formula: Identifiable {
     var text: String
     var name: String
     var variables: [Variable]
+    var sortIndex: Int
     
     init(text: String, name: String, variables: [Variable] = []) {
         self.id = UUID()
         self.text = text
         self.name = name
         self.variables = variables
+        self.sortIndex = 0
     }
 }
 
@@ -58,6 +60,10 @@ extension Color {
 
 extension EnvironmentValues {
     var isZoomed: Bool {
+        #if os(xrOS)
+        false
+        #else
         UIScreen.main.nativeScale != UIScreen.main.scale
+        #endif
     }
 }

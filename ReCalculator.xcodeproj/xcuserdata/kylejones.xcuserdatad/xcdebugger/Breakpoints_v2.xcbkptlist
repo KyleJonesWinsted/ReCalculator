@@ -8,19 +8,19 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Shared/FormulaListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "openNewFormula()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2 - 9cbdbe3d53fe6f53"
+                  uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2 - 9cbdbe3d53fe6f30"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/kylejones/Desktop/ReCalculator/Shared/FormulaListView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "71"
-                  endingLineNumber = "71"
-                  offsetFromSymbolStart = "84">
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "108">
                </Location>
                <Location
-                  uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2 - 9cbdbe3d53fe68b4"
+                  uuid = "EB9E1D90-C657-4307-A2B9-493717DDBCD2 - 9cbdbe3d53fe6f30"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,8 +45,8 @@
                   urlString = "file:///Users/kylejones/Desktop/ReCalculator/Shared/FormulaListView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "74"
-                  endingLineNumber = "74"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
                   offsetFromSymbolStart = "84">
                </Location>
             </Locations>

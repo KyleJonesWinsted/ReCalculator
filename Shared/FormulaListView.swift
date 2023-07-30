@@ -10,50 +10,45 @@ import SwiftData
 
 struct FormulaListView: View {
 
-    @Query var formulas: [Formula]
+    @Query(sort: \.sortIndex) var formulas: [Formula]
     @State var isNewFormulaViewVisible = false
     @Environment(\.modelContext) var modelContext
 
     var body: some View {
-        NavigationView {
-            VStack {
-                NavigationLink(isActive: $isNewFormulaViewVisible) {
-                    FormulaCreationView(formula: Formula(text: "", name: "", variables: []))
-                        .navigationBarTitleDisplayMode(.inline)
-                } label: {
-                    EmptyView()
-                }
-
-                List {
-                    ForEach(formulas) { formula in
-                        NavigationLink {
-                            FormulaCreationView(formula: formula)
-                                .navigationBarTitleDisplayMode(.inline)
-                        } label: {
-                            VStack {
-                                Text(formula.name)
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                Text(formula.text)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                        }
-                    }
-                    .onDelete(perform: deleteFormula)
-//                    .onMove(perform: moveFormula)
-                }
-                .toolbar {
-                    EditButton()
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: openNewFormula) {
-                            Image(systemName: "plus")
+        NavigationStack {
+            List {
+                ForEach(formulas) { formula in
+                    NavigationLink(value: formula) {
+                        VStack {
+                            Text(formula.name)
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Text(formula.text)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
                 }
-                .navigationTitle("Formulas")
+                .onDelete(perform: deleteFormula)
+                .onMove(perform: moveFormula)
+            }
+            
+            .toolbar {
+                EditButton()
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: openNewFormula) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .navigationTitle("Formulas")
+            .navigationDestination(isPresented: $isNewFormulaViewVisible) {
+                FormulaCreationView(formula: Formula(text: "", name: "", variables: []))
+            }
+            .navigationDestination(for: Formula.self) { formula in
+                FormulaCreationView(formula: formula)
             }
 
         }
@@ -66,9 +61,17 @@ struct FormulaListView: View {
         }
     }
 
-//    func moveFormula(indexSet: IndexSet, offset: Int) {
-//        formulas.move(fromOffsets: indexSet, toOffset: offset)
-//    }
+    func moveFormula(indexSet: IndexSet, offset: Int) {
+        let descriptor = FetchDescriptor(sortBy: [SortDescriptor(\Formula.sortIndex)])
+        guard var formulas: [Formula] = try? modelContext.fetch(descriptor) else {
+            return
+        }
+        formulas.move(fromOffsets: indexSet, toOffset: offset)
+        for (index, formula) in formulas.enumerated() {
+            formula.sortIndex = index
+            modelContext.insert(formula)
+        }
+    }
 
     func openNewFormula() {
         isNewFormulaViewVisible = true

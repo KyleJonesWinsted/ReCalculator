@@ -7,6 +7,7 @@
 
 import MathParser
 import SwiftUI
+import SwiftData
 
 struct FormulaCreationView: View {
 
@@ -100,6 +101,7 @@ struct FormulaCreationView: View {
                 }
             }
             .navigationTitle(formula.name)
+            .navigationBarTitleDisplayMode(.inline)
 
         }
     }
@@ -116,6 +118,12 @@ struct FormulaCreationView: View {
         selectVariable(index: 0)
         formula.name = formula.name.trimmingCharacters(in: .whitespacesAndNewlines)
         formula.text = formula.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let formulas: [Formula] = try? modelContext.fetch(FetchDescriptor()) else {
+            return
+        }
+        for index in formulas.indices {
+            formulas[index].sortIndex += 1
+        }
         modelContext.insert(formula)
     }
 
